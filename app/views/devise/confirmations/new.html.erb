@@ -1,0 +1,30 @@
+<style type="text/css">
+  .bod{
+            background: url(/assets/log4.jpg) no-repeat
+           center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 100vh;
+      }
+</style>
+<div class="bod">
+<div class="bg"><div class="bg-container">
+<h2 style="color:orange">Resend confirmation instructions</h2>
+
+<%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true,class: "form-control", autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email) %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Resend confirmation instructions", class: "btn btn-primary btn-block" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div></div></div>

@@ -1,0 +1,28 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Grey+Qo&display=swap');
+
+</style>
+
+<h1 align="center" style="font-family: 'Grey Qo', cursive;font-size: 70px;">Instrument Gallery</h1>
+<h2>Search Results</h2>
+<table >
+
+	<tr >
+		<% count=0 %>
+		<% @instrument.each do |instrument| %>
+		<% if(count % 5)==0 %>
+	</tr>
+
+    <tr>
+    	<% end %>
+    	<% count+=1 %>
+    	<td style="padding:52px" class="polaroid"><%= image_tag instrument.product_image, :height=>"200", :width=>"200" %><br>
+
+    		<%= instrument.name %><br>
+    		<%= instrument. model %><br>
+    		<%= instrument.price %><br>
+    	<%= button_to "Add to cart", line_items_path(:store_id => instrument.id) %></td>
+    	
+    	<% end %>
+    	</tr>
+    	</table>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>MusicBazaar</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      
+     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+  <style type="text/css">
+            .header{
+                    width: 100%; 
+                    position: fixed;
+                    background-color:purple;
+                    color:white;
+                    display:flex;
+                    justify-content: space-between;
+            }
+            .header1{
+                   background-color:purple;
+                    display:flex;
+                   flex-direction: row;
+            }
+            .tag{
+                    
+                    padding:10px 10px;
+            }
+            .header3{
+                  padding-top: 60px;
+                 background-color:darkslategrey;
+                  color:white;
+                  display:flex;
+                 justify-content: space-between;
+            }
+            .header4{
+                   background-color:darkslategrey;
+                    display:flex;
+                   flex-direction: row;
+            }
+            a:hover{
+              background: darkgrey;
+              text-decoration:none;
+              color: white;
+            }
+            .cart:hover{
+                text-decoration:none;
+                background: none;
+            }
+            a:active { text-decoration: none; }
+            #customers {
+              font-family: Arial, Helvetica, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+          .bod1{
+                background: url(/assets/bg1.jpg) no-repeat
+               center center fixed; 
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                height: 90vh;
+          }
+          .bg-container{
+              background-color : #ffffff90;
+              padding : 30px;
+              border-radius: 25px;
+              width: 500px;
+              box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+          .bg{
+                padding: 30px;
+                display : flex;
+                flex-direction : column;
+                justify-content : center;
+                align-items : center;
+                margin-top : 0px;
+                padding-top: 100px;
+          }
+          .polaroid {
+                  width: 250px;
+                  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                  text-align: center;
+          }    
+
+      </style>
+
+
+  </head>
+
+  <body>  
+    <div class="header" >
+      <div class="header1">
+           <div style="color:white">
+              <img src="/assets/logo3.jpg"  style="height: 60px;width: 180px;border-radius: 20px;" class="tag">
+            </div>
+          <% if user_signed_in? %>
+
+            <%= link_to 'Edit profile', edit_user_registration_path,class: "tag", style: "font-size:20px;color:white"%>
+            <%= link_to "Logout", destroy_user_session_path,class: "tag", method: :delete , style: "font-size:20px;color:white"%>
+
+          <% else %>
+
+            <%= link_to "Sign up", new_user_registration_path,class: "tag", style: "font-size:20px;color:white" %>
+            <% unless session[:admin] %>
+            <%= link_to "User Login", new_user_session_path,class: "tag", style: "font-size:20px;color:white" %>
+            <% end %>
+          
+          <% end %>
+     
+            <% if session[:admin] %>
+                <a href="/admin/logout" style="font-size:20px;color:white" class="tag" >Admin Logout</a>
+                <a href="/stores" style="font-size:20px;color:white" class="tag" >My store</a>
+            <% else %>
+                <% unless user_signed_in? %>
+                <a href="/admin/login"  style="font-size:20px;color:white" class="tag">Admin Login</a>
+                <% end %>
+            <% end %>
+
+            
+      </div>
+
+      <div style="padding-top:16px;color:black" >
+          <%= form_tag("/gallery/query", method: "get") do %>      
+            <%= text_field_tag(:search) %>
+            <%= submit_tag("Search", style: "background-color:yellow; border-radius:6px") %>
+          <% end %>
+      </div>
+
+
+      <div>
+          <% if user_signed_in? %>
+          <img src="/assets/dp.jpg"  style="height: 60px;width: 60px;border-radius: 50px;" class="tag">
+          <% end %>
+          <% begin %>
+              <% cart=Cart.find(session[:cart_id]) %>
+              <a href="/carts/<%= cart.id %>" class="tag"><img src="/assets/cart3.png"  style="width:42px;height:42px;" class="cart"></a>
+          <% rescue %>   
+              <a href="/users/sign_in" class="tag"><img src="/assets/cart3.png"  style="width:42px;height:42px;" class="cart"></a>
+          <% end %>  
+      </div>
+    </div>
+         
+    <div class="header3"><div class="header4">
+        
+         <%= link_to "Gallery",gallery_index_path ,class: "tag", style: "color:white" %>
+       
+       
+         <% begin %>
+              <% cart=Cart.find(session[:cart_id]) %>
+              <%= link_to "Cart",  "/carts/#{cart.id}",class: "tag", style: "color:white" %>
+          <% rescue %> 
+              <%= link_to "Cart",  "/users/sign_in",class: "tag", style: "color:white" %>
+          <% end %>
+        
+    </div>
+    <% if user_signed_in? %>
+                <p style="padding-top: 15px; float: right;" class="tag" >Logged in as <strong><%= current_user.email %></strong>.</p>
+                <% $em1=current_user.email %>
+            <% end %>
+  </div>
+
+      <!-- % if notice %>
+            <div style="background-color:transparent;">%= notice %></div>
+      % end %>
+      % if alert %>
+            <div style="background-color:transparent;">%= alert %></div>
+      % end %-->
+    <%= yield %>
+  </body>
+</html>

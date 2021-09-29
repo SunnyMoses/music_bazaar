@@ -1,0 +1,17 @@
+
+
+Hello <%= @name %>,<br>
+
+Payment has been successful for online shopping at music bazaar.<br>
+<h4>Transaction Details:<br></h4>
+Amount:<%= @amt %><br>
+<% puts "------------------------------------------" %>
+
+<% $items.each do |item| %>
+<strong>Product</strong><br>
+Name: <%= item.store.name %><br>
+Price: <%= item.store.price %><br>
+Quantity: <%= item.quantity %><br>
+<% end %>
+
+<p style="color:green">Thank you for being an active customer.</p>

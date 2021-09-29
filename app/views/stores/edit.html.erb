@@ -1,0 +1,19 @@
+<style type="text/css">
+      .bod1{
+            background: url(/assets/log4.jpg) no-repeat
+            center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+      </style>
+<div class="bod1"><div class="bg"><div class="bg-container">
+<h2>Editing Store</h2>
+
+<%= render 'form', store: @store %>
+
+<%= link_to 'Show', @store %> |
+<%= link_to 'Back', stores_path %>
+
+</div></div></div>
