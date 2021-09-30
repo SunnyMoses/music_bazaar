@@ -28,7 +28,6 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   config.assets.compile = true
-   config.action_mailer.default_url_options = { :host => "immense-wildwood-49769.herokuapp.com" }
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
@@ -88,7 +87,21 @@ Rails.application.configure do
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
+  #  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+   config.action_mailer.default_url_options = { :host => "https://immense-wildwood-49769.herokuapp.com/" }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.default_url_options = { host: ENV['MAIL_HOST'] }
+  config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address:              'smtp.gmail.com',
+  port:                 587,
+  domain:               'example.com',
+  user_name:            'sunnysusanparlapelly@gmail.com',
+  password:             '1099109109aA#',
+  authentication:       'plain',
+  enable_starttls_auto: true }
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
