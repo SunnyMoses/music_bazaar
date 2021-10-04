@@ -47,7 +47,7 @@ class GalleryController < ApplicationController
       session[:amount]=nil;
       puts "Successfully charged Rs. #{amount} to the credit card #{credit_card.display_number}"
       flash[:notice]="Successfully charged Rs. #{amount} to the credit card #{credit_card.display_number}"
-      
+      $gcart.destroy
       redirect_to gallery_purchase_complete_path 
     else
       raise StandardError, response.message
@@ -58,7 +58,7 @@ class GalleryController < ApplicationController
     # response = gateway.purchase(amount, credit_card)
     # raise  response.message
       
-       flash[:notice]="Enter valid creds"
+       # flash[:notice]="Enter valid creds"
       
        render gallery_checkout_path
   end

@@ -48,7 +48,7 @@
                    flex-direction: row;
             }
             a:hover{
-              background: darkgrey;
+              background: black;
               text-decoration:none;
               color: white;
             }
@@ -56,8 +56,10 @@
                 text-decoration:none;
                 background: none;
             }
-            a:active { text-decoration: none; }
+            a:active { text-decoration: none; 
+             }
             #customers {
+
               font-family: Arial, Helvetica, sans-serif;
               border-collapse: collapse;
               width: 100%;
@@ -102,7 +104,7 @@
     <div class="header" >
       <div class="header1">
            <div style="color:white">
-              <img src="/assets/logo3.jpg"  style="height: 60px;width: 180px;border-radius: 20px;" class="tag">
+              <img src="/assets/logo.png"  style="height: 60px;width: 180px;border-radius: 0px;" class="">
             </div>
           <% if user_signed_in? %>
 
@@ -131,9 +133,10 @@
       </div>
 
       <div style="padding-top:16px;color:black" >
+        <!-- %= link_to "Continue Shopping", '/gallery/index', {:style=>'color:#FFFdgF;', :class => "btn btn-info"} %-->
           <%= form_tag("/gallery/query", method: "get") do %>      
             <%= text_field_tag(:search) %>
-            <%= submit_tag("Search", style: "background-color:yellow; border-radius:6px") %>
+            <%= submit_tag("Search", style: "background-color:orange; border-radius:6px") %>
           <% end %>
       </div>
 
@@ -147,6 +150,7 @@
               <a href="/carts/<%= cart.id %>" class="tag"><img src="/assets/cart3.png"  style="width:42px;height:42px;" class="cart"></a>
           <% rescue %>   
               <a href="/users/sign_in" class="tag"><img src="/assets/cart3.png"  style="width:42px;height:42px;" class="cart"></a>
+               <% $flag=0 %>
           <% end %>  
       </div>
     </div>
@@ -161,6 +165,7 @@
               <%= link_to "Cart",  "/carts/#{cart.id}",class: "tag", style: "color:white" %>
           <% rescue %> 
               <%= link_to "Cart",  "/users/sign_in",class: "tag", style: "color:white" %>
+              <% $flag=0 %>
           <% end %>
         
     </div>
@@ -170,12 +175,12 @@
             <% end %>
   </div>
 
-      <!-- % if notice %>
-            <div style="background-color:transparent;">%= notice %></div>
-      % end %>
-      % if alert %>
-            <div style="background-color:transparent;">%= alert %></div>
-      % end %-->
+      <% if notice %>
+            <div class="alert alert-success mb-0 text-center" style="margin-bottom: 0px;"><%= notice %></div>
+      <% end %>
+      <% if alert %>
+         <div class="alert alert-danger mb-0 text-center" style="margin-bottom: 0px;"> <%= alert %></div>
+      <% end %>
     <%= yield %>
   </body>
 </html>

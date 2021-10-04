@@ -26,6 +26,7 @@
             padding-top: 100px;
       }
 </style>
+<% $flag=1 %>
 <div  class="bg"><div class="bg-container">
 	<% unless cart.line_items.empty? %>
 	<h1 align="center" style="font-weight: bold;">Your cart </h1>
@@ -57,8 +58,11 @@
 	<% else %>
 		<%= link_to "Checkout", new_user_session_path, {:style=>'color:#FFFFFF;', :class => "btn btn-primary btn-block"} %>
 	<% end %>
-
-<% end %></div></div>
+	<% else %>
+	<h1>Cart is empty</h1>
+	<%= link_to "Shop items", '/gallery/index', {:style=>'color:#FFFdgF;', :class => "btn btn-info" } %>
+<% end %>
+</div></div>
 
 
 	

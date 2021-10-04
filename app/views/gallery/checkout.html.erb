@@ -1,6 +1,16 @@
-<div  class="bg"><div class="bg-container p-4">
-  <h3><strong style="color:orange">Total amount for Checkout Rs. <%= session[:amount] %>/-</strong></h3>
-  <font color="red"><%= flash[:notice] %></font><br>
+<style type="text/css">
+      .bod1{
+            background: url(/assets/cart.jpg) no-repeat
+            center center fixed; 
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+          }
+</style>
+<div class="bod1"><div class="bg"><div class="bg-container">
+  <h3><strong style="color:purple">Total amount for Checkout Rs. <%= session[:amount] %>/-</strong></h3>
+  <font color="red"><!-- %= flash[:notice] %--></font><br>
 
 <%= form_with do |form| %>
 
@@ -59,4 +69,4 @@
 <% end %>
 
 
-</div></div>
+</div></div></div>

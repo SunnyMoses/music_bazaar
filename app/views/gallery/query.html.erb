@@ -18,10 +18,11 @@
     	<% count+=1 %>
     	<td style="padding:52px" class="polaroid"><%= image_tag instrument.product_image, :height=>"200", :width=>"200" %><br>
 
-    		<%= instrument.name %><br>
-    		<%= instrument. model %><br>
-    		<%= instrument.price %><br>
-    	<%= button_to "Add to cart", line_items_path(:store_id => instrument.id) %></td>
+    		<p style="color:green"><%= instrument.name %></p>
+    		
+    		<strong><%= instrument. model %></strong><br>
+    		₹. <%= instrument.price %><br>
+    	<%= button_to "Add to cart", line_items_path(:store_id => instrument.id) , class: "btn btn-success btn-sg"%></td>
     	
     	<% end %>
     	</tr>

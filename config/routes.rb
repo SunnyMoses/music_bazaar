@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   get 'gallery/index'
   post 'gallery/index'
+  delete 'gallery/index'
   post 'gallery/checkout'
   get 'gallery/checkout'
   get 'gallery/purchase_complete'
